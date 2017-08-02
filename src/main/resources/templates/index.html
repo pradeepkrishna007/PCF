@@ -1,0 +1,123 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<script type="text/javascript" src='webjars/jquery/2.2.4/jquery.min.js'></script>
+<script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+						$("#signUpDiv").hide();
+						$("#signUpForm").submit(function() {
+							$("#confirmPassword").remove();
+						});
+						$("#confirmPassword")
+								.blur(
+										function() {
+											var pass = $("#password").val();
+											var conPass = $("#confirmPassword").val();
+											if (pass != conPass) {
+												alert(pass
+														+ ' == '
+														+ conPass
+														+ ' Password and confirm password should be same please correct!');
+												$("input[name = 'password']")
+														.focus();
+											}
+										});
+						$("#signUp").click(function() {
+							$("#signUpDiv").show();
+						});
+						$("#signUp").dblclick(function() {
+							$("#signUpDiv").hide();
+						});
+					});
+</script>
+</head>
+<body>
+	<div th:if="${user != null}">
+		<h3>Thanks for creating account</h3>
+		<span th:text="${user.fName}"> you can login now</span>
+	</div>
+	<form action="login" method="post">
+		<table border="1">
+			<tr>
+				<td colspan="2" align="center"><span>Login Please</span></td>
+			</tr>
+			<tr>
+				<td><label for="username">Username :</label></td>
+				<td><input type="text" name="username"></input></td>
+			</tr>
+			<tr>
+				<td><label for="password">Password :</label></td>
+				<td><input type="password" name="password"></input></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit"
+					name="login"></input></td>
+			</tr>
+		</table>
+	</form>
+	<br />
+	<table border="1">
+		<tr>
+			<td><span
+				style="text-decoration: blink; font-family: cursive; font-weight: bold;">If
+					you don't have account please click on Sign Up :</span>
+				<button id="signUp">Sign Up</button></td>
+		</tr>
+	</table>
+	<div id="signUpDiv">
+		<form action="save" method="post" id="signUpForm">
+			<table border="1">
+				<tr>
+					<td colspan="2" align="center"><span>All fields are
+							mandatory **</span></td>
+				</tr>
+				<tr>
+					<td><label for="username">Username :</label></td>
+					<td><input type="text" name="username" id="username"
+						autofocus="autofocus" width="40"></input></td>
+				</tr>
+				<tr>
+					<td><label for="password">Password :</label></td>
+					<td><input type="text" name="password" id="password"
+						width="30"></input></td>
+				</tr>
+				<tr>
+					<td><label for="confirmPassword">Confirm Password :</label></td>
+					<td><input type="text" name="confirmPassword"
+						id="confirmPassword" width="30"></input></td>
+				</tr>
+				<tr>
+					<td><label for="fName">First Name :</label></td>
+					<td><input type="text" name="fName" id="fName" width="30"></input></td>
+				</tr>
+				<tr>
+					<td><label for="lName">Last Name :</label></td>
+					<td><input type="text" name="lName" id="lName" width="30"></input></td>
+				</tr>
+				<tr>
+					<td><label for="email">Email id :</label></td>
+					<td><input type="email" name="email" id="email" width="30"></input></td>
+				</tr>
+				<tr>
+					<td><label for="phoneNumber">Phone Number :</label></td>
+					<td><input type="text" name="phoneNumber" id="phoneNumber"
+						width="30"></input></td>
+				</tr>
+				<tr>
+					<td><label for="address">Complete Address :</label></td>
+					<td><textarea rows="20" cols="30" name="address" id="address"></textarea></td>
+				</tr>
+				<tr>
+					<td><label for="zipCode">City Pin Code :</label></td>
+					<td><input type="text" name="zipCode" id="zipCode" width="30"></input></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><input type="submit"
+						name="SignUp"></input></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>
